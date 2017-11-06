@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        .background {background-color: lightblue}
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="page-header text-center">
+            <h1><span class="fa fa-user-circle-o"></span> Profile Page</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
+
+                    <% if (user.local.email) { %>
+                        <p>
+                            <strong>User Id</strong>: <%= user._id %><br>
+                            <strong>Email</strong>: <%= user.local.email %><br>
+                            <strong>Name</strong>: <%= user.local.name %><br>
+                            <strong>Phone Number</strong>: <%= user.local.phoneNumber %><br>
+                        </p>
+                    <% } else { %>
+                        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+                    <% } %>
+                     <!-- check if the user has this token (is the user authenticated with this social account) -->
+                     <% if (user.facebook.token) { %>
+                        <p>
+                            <strong>User Id</strong>: <%= user._id %><br>
+                            <strong>Facebook Name</strong>: <%= user.facebook.name %><br>
+                            <strong>Facebook Email</strong>: <%= user.facebook.email %><br>
+                        </p>
+                    <% } else { %>
+                        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+                    <% } %>
+                    <a href="/change" class="btn btn-default"><span class="fa fa-user"></span> Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
